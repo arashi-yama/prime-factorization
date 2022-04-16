@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import kotlin.math.floor
+import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }else if(view.id===R.id.deleteall){
                 num=""
             }else num=num+c
-            tvi.text=num
+            if(!(c=="0"&&num=="0"))tvi.text=num
             var result =if(num==""||num=="0"||num=="1")listOf(num) else pf(num.toInt())
             tv.text="${result.joinToString("*")}"
             var ex=findViewById<TextView>(R.id.exresult)
@@ -71,7 +73,7 @@ fun pf(int:Int):MutableList<Int>{
     var num=int
     var result=mutableListOf<Int>()
     var j=1
-    for(i in 0..int){
+    for(i in 0..floor(sqrt(int.toDouble())).toInt()){
         j++
         if(num%j===0){
             num /= j
